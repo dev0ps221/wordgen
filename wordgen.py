@@ -49,23 +49,23 @@ def generate(wordlist,low,up,*props):
         
                 tabWord = stringToChars(wordlist[-1])
         
-                if actual is not 0:
+                if actual != 0:
 
                     for c in str(low): #stringToChars(low)[colChar] 
 
                         tabWord[len(tabWord)-actual] = c 
-                        time.sleep(0.04)
+                        # time.sleep(0.04)
                         word = ""
-                        print(tabWord[col]) 
 
                         for ch in tabWord:
                             word+=ch
 
                         time.sleep(0.005)
                         os.system('clear')
-                        banniere()
+                        # banniere()
 
-                        print(f"mot actuel:                                           {word}")
+                        # print(f"mot actuel:                                           {word}")
+                        print(f"{word}")
 
                         wordlist.append(word)
                 # word = wordlist[-1]
