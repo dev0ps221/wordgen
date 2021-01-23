@@ -7,6 +7,8 @@ import string
 size = 4
 low = string.ascii_lowercase
 up = string.ascii_uppercase
+def banniere():
+	cmd("figlet Wordgen 0.01")
 def clear():
 	cmd('clear')
 
@@ -48,11 +50,9 @@ def generate(size,set):
 	for cursor in rev(cursors):
 		word = fill(word,cursor,set)
 
+banniere()
 generate(size,string.ascii_lowercase)
 
 
-banniere()
 
 
-
-# print(wordlist)
