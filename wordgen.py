@@ -33,7 +33,7 @@ def fill(word,cursor,set):
 		if (cursor+1) < len(word):
 			word = fill(word,cursor+1,set)
 		clear()
-		print(word)
+		print("".join(word))
 		time.sleep(0.009)
 	fill.ran+=1
 	return word
