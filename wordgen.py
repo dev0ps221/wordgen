@@ -3,12 +3,13 @@ import time
 from hashlib import md5
 from os import system as cmd
 import string
-
 size = 4
 low = string.ascii_lowercase
 up = string.ascii_uppercase
+
 def banniere():
 	cmd("figlet Wordgen 0.01")
+
 def clear():
 	cmd('clear')
 
@@ -33,7 +34,7 @@ def fill(word,cursor,set):
 			word = fill(word,cursor+1,set)
 		clear()
 		print(word)
-        time.sleep(0.009)
+		time.sleep(0.009)
 	fill.ran+=1
 	return word
 
