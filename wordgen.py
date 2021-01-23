@@ -1,91 +1,58 @@
 #!/usr/bin/python3.8
-import string
-import os
 import time
+from hashlib import md5
+from os import system as cmd
+import string
 
+size = 4
 low = string.ascii_lowercase
 up = string.ascii_uppercase
-limit = 8
-start = 8
-actual = 0
+def clear():
+	cmd('clear')
 
-def banniere():
-    os.system('figlet WORDGEN')
-    print("V:1.0.1")
+def rev(array):
+	n = len(array)-1
+	arr = []
+	while n >= 0 :
+		arr.append(array[n])
+		n-=1
+	return arr
 
-def stringToChars(strng):
-    charList = []
-    for c in strng:
-        charList.append(c)
-    return charList
+def fill(word,cursor,set):
+	if not hasattr(fill, "ran"):
+		fill.ran = 0
+	print(fill.ran)
+	for letter in set:
+		if (cursor+1) < len(word) and letter == set[0] and fill.ran !=0 :
+			fill.ran+=1
+			continue
+		word[cursor] = letter
+		if (cursor+1) < len(word):
+			word = fill(word,cursor+1,set)
+		clear()
+		print(word)
+        time.sleep(0.009)
+	fill.ran+=1
+	return word
 
-def generate(wordlist,low,up,*props):
-    if len(props) == 3:
-        start,limit,actual = props[0],props[1],props[2]
-    if len(props) == 2:
-        start,limit,actual = props[0],props[1],0
-    if len(props) == 1:
-        start,limit,actual = props[0],props[0],0 
-    if not len(props):
-        start,limit,actual = 4,4,0 
-    word = ""
-    col = 0
-    cn = 0
-    while col < limit:
+def initialize(size,set):
+	cursors = []
+	word = []
+	for n in range(size):
+		word.append(set[0])
+		cursors.append(n)
+	return (cursors,word)
 
-        for char in str(low):
+def generate(size,set):
+	cursors,word = initialize(size,set)
+	for cursor in rev(cursors):
+		word = fill(word,cursor,set)
 
-            while actual < start:
-                word += stringToChars(low)[col]
-                actual += 1
+generate(size,string.ascii_lowercase)
 
-            wordlist.append(word)
-            actual = 0
-            tabWord = stringToChars(wordlist[0])
-            tabWord[col] = char
-            wordlist.append("".join(tabWord))
-
-            while actual < start:
-        
-                tabWord = stringToChars(wordlist[-1])
-        
-                if actual != 0:
-
-                    for c in str(low): #stringToChars(low)[colChar] 
-
-                        tabWord[len(tabWord)-actual] = c 
-                        # time.sleep(0.04)
-                        word = ""
-
-                        for ch in tabWord:
-                            word+=ch
-
-                        time.sleep(0.005)
-                        os.system('clear')
-                        # banniere()
-
-                        # print(f"mot actuel:                                           {word}")
-                        print(f"{word}")
-
-                        wordlist.append(word)
-                # word = wordlist[-1]
-                # tabWord = stringToChars(word)
-                # for c in stringToChars(low):
-                #     word = ""
-
-                actual+=1
-
-            actual = 0
-            
-        col+=1
-        
-
-
-    return wordlist
 
 banniere()
 
-wordlist = generate([],low,up,start,limit,actual)
 
 
 # print(wordlist)
